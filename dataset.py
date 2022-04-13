@@ -1,10 +1,8 @@
 import torch 
 from collections import Counter
-DEVICE = torch.cuda.device("cuda")
 
 class Dataset(torch.utils.data.Dataset):
     def __init__(self, args):
-        self.device = ("cuda")
         self.args = args
         self.words = self.load_words()
         self.uniq_words = self.get_uniq_words()
@@ -13,7 +11,7 @@ class Dataset(torch.utils.data.Dataset):
         self.word_to_index = {word: index for index, word in enumerate(self.uniq_words)}
 
         self.words_indices = [self.word_to_index[w] for w in self.words]
-
+        
     def load_words(self):
         print("\nLoading words....")
         train_df = open('doomwordlist.txt', 'r', encoding='utf-8').read()
@@ -27,11 +25,14 @@ class Dataset(torch.utils.data.Dataset):
         return len(self.words_indices) - self.args.sequence_length
 
     def __getitem__(self, index):
-        t1 = torch.tensor(self.words_indices[index:index+self.args.sequence_length])
-        t1.to('cuda')
-        t2 = torch.tensor(self.words_indices[index+1:index+self.args.sequence_length+1])
-        t2.to('cuda')
+        cuda0 = torch.device('cuda:0')
 
+        t1 = torch.tensor(self.words_indices[index:index+self.args.sequence_length], device=cuda0)
+        #print(t1.get_device())
+        t2 = torch.tensor(self.words_indices[index+1:index+self.args.sequence_length+1], device=cuda0)
+        #t2.device = 'cuda'
+
+        #print(t1.device, t2.device)
         return(
             t1, 
             t2
