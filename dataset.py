@@ -6,6 +6,7 @@ class Dataset(torch.utils.data.Dataset):
         self.args = args
         self.words = self.load_words()
         self.uniq_words = self.get_uniq_words()
+        self.cuda0 = torch.device('cuda:0')
 
         self.index_to_word = {index: word for index, word in enumerate(self.uniq_words)}
         self.word_to_index = {word: index for index, word in enumerate(self.uniq_words)}
@@ -25,15 +26,9 @@ class Dataset(torch.utils.data.Dataset):
         return len(self.words_indices) - self.args.sequence_length
 
     def __getitem__(self, index):
-        cuda0 = torch.device('cuda:0')
 
-        t1 = torch.tensor(self.words_indices[index:index+self.args.sequence_length], device=cuda0)
-        #print(t1.get_device())
-        t2 = torch.tensor(self.words_indices[index+1:index+self.args.sequence_length+1], device=cuda0)
-        #t2.device = 'cuda'
-
-        #print(t1.device, t2.device)
-        return(
-            t1, 
-            t2
+       return (
+        torch.tensor(self.words_indices[index:index+self.args.sequence_length], device=self.cuda0),
+        torch.tensor(self.words_indices[index+1:index+self.args.sequence_length+1], device=self.cuda0)
         )
+        

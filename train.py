@@ -28,7 +28,7 @@ def train(dataset, model, args):
 
             print({ 'epoch': epoch, 'batch': batch, 'loss':loss.item() })
 
-
+# TODO: make this a more 'interactive' function perhaps
 def predict(dataset, model, text, next_words = 100):
     model.eval()
     print(model.eval())
@@ -48,3 +48,4 @@ def predict(dataset, model, text, next_words = 100):
         words.append(dataset.index_to_word[word_index])
 
     return " ".join(words)
+    
