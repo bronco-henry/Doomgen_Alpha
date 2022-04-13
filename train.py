@@ -1,4 +1,3 @@
-import argparse
 import torch
 import numpy as np
 from torch import nn, optim
@@ -7,7 +6,6 @@ from model import Model
 from dataset import Dataset
 
 def train(dataset, model, args):
-    #model.train()
     mydataloader = DataLoader(dataset, batch_size=args.batch_size)
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=0.001)
@@ -48,4 +46,3 @@ def predict(dataset, model, text, next_words = 100):
         words.append(dataset.index_to_word[word_index])
 
     return " ".join(words)
-    
