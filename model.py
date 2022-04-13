@@ -11,8 +11,8 @@ class Model(nn.Module):
         self.cuda0 = torch.device('cuda:0')
 
         n_vocab = len(dataset.uniq_words)
-        self.embedding = nn.Embedding(num_embeddings=n_vocab, embedding_dim=self.embedding_dim, device=cuda0)
-        self.lstm = nn.LSTM(input_size=self.lstm_size, hidden_size=self.lstm_size, num_layers=self.num_layers, dropout=0.2, device=cuda0)
+        self.embedding = nn.Embedding(num_embeddings=n_vocab, embedding_dim=self.embedding_dim, device=self.cuda0)
+        self.lstm = nn.LSTM(input_size=self.lstm_size, hidden_size=self.lstm_size, num_layers=self.num_layers, dropout=0.2, device=self.cuda0)
         self.fc = nn.Linear(self.lstm_size, n_vocab, device=self.cuda0)
 
     def forward(self, x, prev_state):
