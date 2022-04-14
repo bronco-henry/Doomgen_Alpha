@@ -4,6 +4,9 @@ Attempting to create and train a recurrent neural net on the lyrics of MF Doom m
 TODO:
 
 - split data into test, train, & valid sets
+- experiment with re-formatting data (i.e. newlines where lines actually end)
+- experiment with different configuration of types and numbers of layers
+- try out the model with different datasets i.e. twitch chat logs
 
 DONE:
 
