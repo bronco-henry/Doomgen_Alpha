@@ -26,7 +26,6 @@ def train(dataset, model, args):
 
             print({ 'epoch': epoch, 'batch': batch, 'loss':loss.item() })
 
-# TODO: make this a more 'interactive' function perhaps
 
 def eval(model):
     print(model.eval())
