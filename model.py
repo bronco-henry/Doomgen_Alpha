@@ -22,7 +22,6 @@ class Model(nn.Module):
         return logits, state
 
     def init_state(self, sequence_length):
-        #cuda0 = torch.device('cuda:0')
         
         return (
         torch.zeros(self.num_layers, sequence_length, self.lstm_size, device=self.cuda0), 
