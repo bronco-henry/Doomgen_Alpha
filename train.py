@@ -27,10 +27,11 @@ def train(dataset, model, args):
             print({ 'epoch': epoch, 'batch': batch, 'loss':loss.item() })
 
 # TODO: make this a more 'interactive' function perhaps
-def predict(dataset, model, text, next_words = 100):
-    model.eval()
+
+def eval(model):
     print(model.eval())
 
+def predict(dataset, model, text, next_words = 100):
     words = text.split(' ')
     state_h, state_c = model.init_state(len(words))
 
