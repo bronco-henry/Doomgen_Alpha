@@ -32,3 +32,5 @@ class Dataset(torch.utils.data.Dataset):
         torch.tensor(self.words_indices[index+1:index+self.args.sequence_length+1], device=self.cuda0)
         )
         
+if __name__ == "__main__":
+    print("why was this run as main lol")
