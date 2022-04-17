@@ -12,3 +12,4 @@ DONE:
 
 - fix devices so GPU/CUDA is used instead of CPU
 - add checkpoints so I don't have to re-train
+- more sophisticated(bloated) saving/loading implemented 
