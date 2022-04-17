@@ -8,8 +8,6 @@ class Model(nn.Module):
     def __init__(self, dataset):
         super(Model, self).__init__()
         
-        #self.MODELFOLDER = "./models"
-        #self.MODELPATH = os.path.join(self.MODELFOLDER,"model.pt")
         self.MODELPATH = Path("./models/model.pt")
         self.EPOCHSPATH = Path("./models/modelepochs.pickle")
         self.DEFAULTSTATE = {"Epochs": 0, "Name": "DOOMBOT"}
@@ -19,10 +17,10 @@ class Model(nn.Module):
         self.model_name = self.model_data["Name"]
 
         if os.path.exists(self.EPOCHSPATH):
-            #print("DEBUGDEBUGDEBUGDEBUGDEBUG: Attempting to load number of prev epochs")
+            #Don't try to load_epochs until something has been written to the EPOCHSPATH file
             self.load_epochs()
         else:
-            print(">>File containing prev. epochs does not exist. File will be created after initial training or with SAVE.")
+            print(">>File containing number of prev. epochs does not exist. File will be created after initial training or with SAVE.")
 
         self.lstm_size=128
         self.embedding_dim=128
@@ -36,7 +34,6 @@ class Model(nn.Module):
         self.fc = nn.Linear(self.lstm_size, n_vocab, device=self.cuda0)
 
 
-
     def forward(self, x, prev_state):
         embed = self.embedding(x)
         output, state = self.lstm(embed, prev_state)
@@ -45,8 +42,6 @@ class Model(nn.Module):
 
 
     def save_epochs(self):
-        #torch.save(self.state_dict(), self.MODELPATH)
-        print("DEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUG: TRYING TO WRITE CURRENT OF EPOCHS: ", (self.epochs_trained))
         with open(self.EPOCHSPATH, 'wb+') as self.f:
             self.model_data["Epochs"] = self.epochs_trained
             self.f.seek(0)
@@ -59,7 +54,6 @@ class Model(nn.Module):
     def load_epochs(self):
         with open(self.EPOCHSPATH, 'rb') as self.f:
             self.model_data = pickle.load(self.f)
-            print("DEBUGDEBUGDEBUGDEBUGDEBUGDEBUG: ", self.model_data)
             self.epochs_trained = self.model_data["Epochs"]
         return 
 

@@ -8,7 +8,7 @@ from model import Model
 from dataset import Dataset
 from train import train, predict
 
-#benchmarking
+# for benchmarking
 import timeit
 import time
 
@@ -19,7 +19,6 @@ parser.add_argument('--batch_size', type=int, default=256)
 parser.add_argument('--sequence_length', type=int, default=4)
 args = parser.parse_args()
 
-#benchmarking function
 start_time = timeit.default_timer()
 dataset = Dataset(args)
 print("\n>>Loaded dataset in ", timeit.default_timer() - start_time, " seconds")
@@ -49,7 +48,7 @@ print(">>Epochs trained: ", model.epochs_trained)
 
 while True:
 
-    text = input("\n>>[optional] Enter a prompt to generate from. Type QUIT to end or TRAIN to train for an additional epoch\n>")
+    text = input("\n>>Type some word(s) that the bot will then add to. Press ENTER to generate words with no prompt. Type QUIT to end or TRAIN or SAVE\n>")
  
     # TODO: CLEAN UP THE LOGIC HERE ITS TOTAL SHIT
     if text == "TRAIN":
@@ -70,9 +69,8 @@ while True:
         model.train()
 
         train(dataset, model, args2)
-        print("\n>>Training completed in ",timeit.default_timer() - start_time ," seconds. This training will not be saved.")
-        print("\n", model.eval())
-        print("Epochs trained: ", model.epochs_trained)
+        print("\n>>Training completed in ",timeit.default_timer() - start_time ," seconds.")
+        print("\n>>Epochs trained: ", model.epochs_trained)
 
     elif text == "SAVE":
         save_choice = input("\n>>Overwrite existing model? (Y/N)\n>")

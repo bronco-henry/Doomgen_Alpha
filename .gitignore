@@ -4,3 +4,4 @@ __pycache__/train.cpython-310.pyc
 __pycache__/*
 models/model.pt
 models/modelepochs.pickle
+uberduckkeys.txt

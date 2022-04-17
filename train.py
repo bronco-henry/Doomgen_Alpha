@@ -24,7 +24,7 @@ def train(dataset, model, args):
             loss.backward()
             optimizer.step()
 
-            print({ 'current epoch': model.epochs_trained +1, 'batch': batch, 'loss':loss.item() })
+            print({'epochs this run':epoch, "/":args.max_epochs, 'total epochs': model.epochs_trained +1, 'batch': batch, 'loss':loss.item() })
         
         model.epochs_trained += 1
 
