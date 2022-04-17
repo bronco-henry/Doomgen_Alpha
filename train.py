@@ -24,11 +24,10 @@ def train(dataset, model, args):
             loss.backward()
             optimizer.step()
 
-            print({ 'epoch': epoch, 'batch': batch, 'loss':loss.item() })
+            print({ 'current epoch': model.epochs_trained +1, 'batch': batch, 'loss':loss.item() })
+        
+        model.epochs_trained += 1
 
-
-def eval(model):
-    print(model.eval())
 
 def predict(dataset, model, text, next_words = 100):
     words = text.split(' ')
@@ -46,3 +45,6 @@ def predict(dataset, model, text, next_words = 100):
         words.append(dataset.index_to_word[word_index])
 
     return " ".join(words)
+
+if __name__ == "__main__":
+    print("why was this run as main lol")
